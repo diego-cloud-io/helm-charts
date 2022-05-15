@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  webservice:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2022-05-15T22:33:40.731455+01:00"
+    description: A Helm chart for Kubernetes
+    digest: 7d21b602c2ab69f43dac0b34455776fd374a6a950a17cc1a9dcc427ac69111d8
+    icon: https://techamigos.co/wp-content/uploads/2020/01/favicon.png
+    name: webservice
+    type: application
+    urls:
+    - https://diego-cloud-io.github.io/helm-charts/webservice-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-05-15T22:33:40.719554+01:00"

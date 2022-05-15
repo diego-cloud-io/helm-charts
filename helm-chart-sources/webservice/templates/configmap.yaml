@@ -1,0 +1,8 @@
+{{- if .Values.env.config}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "webservice.fullname" . }}
+data:
+{{.Values.env.config | toYaml | indent 2}}
+{{- end}}
