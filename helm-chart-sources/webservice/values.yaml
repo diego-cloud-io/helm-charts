@@ -93,6 +93,8 @@ tolerations: []
 
 affinity: {}
 
+# priorityClassName: 
+
 env:
   # default sets for pre-canned values and non-literals.
   defaultSets:
