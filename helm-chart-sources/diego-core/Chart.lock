@@ -1,0 +1,6 @@
+dependencies:
+- name: webservice
+  repository: https://diego-cloud-io.github.io/helm-charts
+  version: 0.2.0
+digest: sha256:b232c970cf81227f1649727dfc459731fa3f4886835d600a2fac9722b15bba1f
+generated: "2022-06-15T12:59:10.874443+01:00"

@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controller-manager
+  labels:
+    control-plane: controller-manager
+spec:
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: manager
+      labels:
+        control-plane: controller-manager
+    spec:
+      volumes:
+      - name: github
+        secret:
+          secretName: github
+          optional: false
+      - name: manager-config
+        configMap:
+          name: manager-config
+      securityContext:
+        runAsNonRoot: true
+      containers:
+      - command:
+        - /manager
+        image: {{ .Values.diego_application_controller.image.repository }}:{{ .Values.diego_application_controller.image.tag }}
+        name: manager
+        args:
+        - "--config=/controller_manager_config.yaml"
+        volumeMounts:
+        - name: manager-config
+          mountPath: /controller_manager_config.yaml
+          subPath: controller_manager_config.yaml
+        - name: github
+          mountPath: "/etc/controller/github"
+          readOnly: true
+        env:
+        - name: GITHUB_PRIVATE_KEY
+          value: /etc/controller/github/app.pem
+        - name: GITHUB_APP_ID
+          valueFrom:
+            secretKeyRef:
+              name: github
+              key: app_id
+              optional: false
+        - name: GITHUB_INSTALLATION_ID
+          valueFrom:
+            secretKeyRef:
+              name: github
+              key: installation_id
+              optional: false
+        securityContext:
+          allowPrivilegeEscalation: false
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        # TODO(user): Configure the resources accordingly based on the project requirements.
+        # More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+      serviceAccountName: controller-manager
+      terminationGracePeriodSeconds: 10
