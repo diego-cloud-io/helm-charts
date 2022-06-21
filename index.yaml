@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  diego-core:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-06-21T11:02:50.438364+01:00"
+    description: A Helm chart for installation of core diego components
+    digest: 25484ecad3ab10cfdf120374a1681a9fdfcc8ca8370250d0d5efe305dca649d4
+    name: diego-core
+    type: application
+    urls:
+    - https://diego-cloud-io.github.io/helm-charts/diego-core-0.1.0.tgz
+    version: 0.1.0
   webservice:
   - apiVersion: v2
     appVersion: 0.0.0
@@ -23,4 +34,4 @@ entries:
     urls:
     - https://diego-cloud-io.github.io/helm-charts/webservice-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-14T16:27:39.563685+01:00"
+generated: "2022-06-21T11:02:50.436361+01:00"
