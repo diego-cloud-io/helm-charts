@@ -8,5 +8,5 @@ roleRef:
   name: diego-application-manager-role
 subjects:
 - kind: ServiceAccount
-  name: controller-manager
+  name: diego-application-controller-manager
   namespace: {{ .Release.Namespace }}

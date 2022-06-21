@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: controller-manager
+  name: diego-application-controller
   labels:
     control-plane: controller-manager
 spec:
@@ -17,13 +17,13 @@ spec:
         control-plane: controller-manager
     spec:
       volumes:
-      - name: github
+      - name: github-app
         secret:
-          secretName: github
+          secretName: github-app
           optional: false
       - name: manager-config
         configMap:
-          name: manager-config
+          name: diego-application-controller-config
       securityContext:
         runAsNonRoot: true
       containers:
@@ -37,7 +37,7 @@ spec:
         - name: manager-config
           mountPath: /controller_manager_config.yaml
           subPath: controller_manager_config.yaml
-        - name: github
+        - name: github-app
           mountPath: "/etc/controller/github"
           readOnly: true
         env:
@@ -46,13 +46,13 @@ spec:
         - name: GITHUB_APP_ID
           valueFrom:
             secretKeyRef:
-              name: github
+              name: github-app
               key: app_id
               optional: false
         - name: GITHUB_INSTALLATION_ID
           valueFrom:
             secretKeyRef:
-              name: github
+              name: github-app
               key: installation_id
               optional: false
         securityContext:
@@ -78,5 +78,5 @@ spec:
           requests:
             cpu: 10m
             memory: 64Mi
-      serviceAccountName: controller-manager
+      serviceAccountName: diego-application-controller-manager
       terminationGracePeriodSeconds: 10

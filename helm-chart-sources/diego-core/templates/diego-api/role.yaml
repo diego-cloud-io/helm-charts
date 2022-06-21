@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: application-viewer-role
+  name: diego-application-viewer-role
 rules:
 - apiGroups:
   - management.diegocloud.io

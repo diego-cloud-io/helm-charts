@@ -14,4 +14,4 @@ data:
       resourceName: 45e7a33c.diegocloud.io
 kind: ConfigMap
 metadata:
-  name: manager-config
+  name: diego-application-controller-config

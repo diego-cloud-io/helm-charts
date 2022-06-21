@@ -2,6 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+
 ####### heed this warning...
 # WARNING: this will emit CRDs as standard templates
 # it is intended as a convenience for one-installation-per-cluster
@@ -9,34 +10,16 @@
 diego_application_controller_crds:
   enabled: false
 
-diego_api:
-  serviceAccount:
-    create: true
-    name: "diego-api"
+# # set priority class
+# priorityClassName: 
+
+diegoapi:
+  # host: diego-api.core.example.com
   image:
     repository: diegocloudio/diego-api
     tag: main
-  
-  readinessProbe:
-    httpGet:
-      path: /health
-      port: 8080
-    initialDelaySeconds: 10
-    periodSeconds: 20
-  livenessProbe:
-    httpGet:
-      path: /health
-      port: 8080
-    initialDelaySeconds: 10
-    periodSeconds: 20
-
-  containerPort: 8080
-  service:
-    type: NodePort
-    port: 8080
 
 diego_application_controller:
-  enabled: true
   image:
     repository: diegocloudio/application-controller
     tag: main

@@ -5,8 +5,8 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: application-viewer
+  name: diego-application-viewer
 subjects:
 - kind: ServiceAccount
-  name: {{ .Values.diego_api.serviceAccount.name }}
+  name: diego-api
   namespace: {{ .Release.Namespace }}
