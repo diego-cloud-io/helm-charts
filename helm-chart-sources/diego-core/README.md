@@ -24,8 +24,6 @@ It should have keys:
  * ARGOCD_PASSWORD - corresponding to username
  * AUTH0_DOMAIN - e.g. 
  * AUTH0_AUDIENCE - e.g. https://diego-api.core.example.com
- * AUTH0_CLIENT_ID - e.g. 
- * AUTH0_CLIENT_SECRET - e.g. 
  * GITHUB_REPO_OWNER - e.g. my-github-org
 
 
@@ -104,8 +102,6 @@ stringData:
   ARGOCD_PASSWORD: password
   AUTH0_DOMAIN: https://diegocloud.eu.auth0.com/
   AUTH0_AUDIENCE: https://diego-api.core.example.com
-  AUTH0_CLIENT_ID: "1234567890"
-  AUTH0_CLIENT_SECRET: "1234567890"
   GITHUB_REPO_OWNER: diego-cloud-io
   GIN_MODE: release
 EOF
