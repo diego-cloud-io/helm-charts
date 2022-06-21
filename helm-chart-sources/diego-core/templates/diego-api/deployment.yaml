@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: diego-api
+  labels:
+    app.kubernetes.io/instance: diego-api
+    app.kubernetes.io/name: webservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: diego-api
+      app.kubernetes.io/name: webservice
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: api
+      labels:
+        app.kubernetes.io/instance: diego-api
+        app.kubernetes.io/name: webservice
+    spec:
+      volumes:
+      - name: github-app
+        secret:
+          secretName: github-app
+          optional: false
+      # securityContext:
+      #   runAsNonRoot: true
+      containers:
+      - image: {{ .Values.diegoapi.image.repository }}:{{ .Values.diegoapi.image.tag }}
+        name: api
+        volumeMounts:
+        - name: github-app
+          mountPath: "/etc/controller/github"
+          readOnly: true
+        env:
+        - name: GITHUB_PRIVATE_KEY
+          value: /etc/controller/github/app.pem
+        - name: GITHUB_APP_ID
+          valueFrom:
+            secretKeyRef:
+              name: github-app
+              key: app_id
+              optional: false
+        - name: GITHUB_INSTALLATION_ID
+          valueFrom:
+            secretKeyRef:
+              name: github-app
+              key: installation_id
+              optional: false
+        - name: PORT
+          value: "8080"
+        - name: DIEGO_APPLICATION_NAMESPACE
+          value: applications
+        envFrom:
+        - secretRef:
+            name: diego-api
+        securityContext:
+          allowPrivilegeEscalation: false
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 1
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+      serviceAccountName: diego-api
+      terminationGracePeriodSeconds: 10

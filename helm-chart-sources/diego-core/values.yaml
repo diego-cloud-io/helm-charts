@@ -1,0 +1,25 @@
+# Default values for diego-core.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+####### heed this warning...
+# WARNING: this will emit CRDs as standard templates
+# it is intended as a convenience for one-installation-per-cluster
+# if you are deploying this more than once per cluster, then there will be conflicts
+diego_application_controller_crds:
+  enabled: false
+
+# # set priority class
+# priorityClassName: 
+
+diegoapi:
+  # host: diego-api.core.example.com
+  image:
+    repository: diegocloudio/diego-api
+    tag: main
+
+diego_application_controller:
+  image:
+    repository: diegocloudio/application-controller
+    tag: main
