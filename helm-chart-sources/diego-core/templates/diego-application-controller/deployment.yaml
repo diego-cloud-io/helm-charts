@@ -24,6 +24,10 @@ spec:
       - name: manager-config
         configMap:
           name: diego-application-controller-config
+      - name: cert
+        secret:
+          defaultMode: 420
+          secretName: webhook-server-cert
       securityContext:
         runAsNonRoot: true
       containers:
@@ -40,6 +44,9 @@ spec:
         - name: github-app
           mountPath: "/etc/controller/github"
           readOnly: true
+        - mountPath: /tmp/k8s-webhook-server/serving-certs
+          name: cert
+          readOnly: true
         env:
         - name: GITHUB_PRIVATE_KEY
           value: /etc/controller/github/app.pem
@@ -55,6 +62,10 @@ spec:
               name: github-app
               key: installation_id
               optional: false
+        ports:
+        - containerPort: 9443
+          name: webhook-server
+          protocol: TCP
         securityContext:
           allowPrivilegeEscalation: false
         livenessProbe:
