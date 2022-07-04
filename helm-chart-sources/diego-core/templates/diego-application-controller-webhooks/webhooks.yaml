@@ -1,0 +1,58 @@
+{{- if .Values.diego_application_controller_webhooks.enabled -}}
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/diego-application-controller-serving-cert
+  name: diego-application-controller-mutating-webhook-configuration
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    service:
+      name: diego-application-controller-webhook-service
+      namespace: {{ .Release.Namespace }}
+      path: /mutate-management-diegocloud-io-v1alpha1-application
+  failurePolicy: Fail
+  name: mapplication.kb.io
+  rules:
+  - apiGroups:
+    - management.diegocloud.io
+    apiVersions:
+    - v1alpha1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - applications
+  sideEffects: None
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/diego-application-controller-serving-cert
+  name: diego-application-controller-validating-webhook-configuration
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    service:
+      name: diego-application-controller-webhook-service
+      namespace: {{ .Release.Namespace }}
+      path: /validate-management-diegocloud-io-v1alpha1-application
+  failurePolicy: Fail
+  name: vapplication.kb.io
+  rules:
+  - apiGroups:
+    - management.diegocloud.io
+    apiVersions:
+    - v1alpha1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - applications
+  sideEffects: None
+{{- end -}}

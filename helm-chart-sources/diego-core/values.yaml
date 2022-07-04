@@ -10,6 +10,10 @@
 diego_application_controller_crds:
   enabled: false
 
+# likewise, the following is per-cluster, so should only ever be managed at a single level.
+diego_application_controller_webhooks:
+  enabled: false
+
 # # set priority class
 # priorityClassName: 
 
