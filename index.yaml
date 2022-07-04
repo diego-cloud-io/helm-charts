@@ -3,9 +3,9 @@ entries:
   diego-core:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-07-04T15:21:28.905914+01:00"
+    created: "2022-07-04T16:45:24.672687+01:00"
     description: A Helm chart for installation of core diego components
-    digest: 2b9d8021920a0b6769d94ee46b0eb7c3c2d99734042d512f3c7e7e9dec0b6db9
+    digest: 27696b549a3582116d036df3f7958e375ae9a3500e5072d526ee8861ac44e6fa
     name: diego-core
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-07-04T15:21:28.90243+01:00"
+    created: "2022-07-04T16:45:24.671474+01:00"
     description: A Helm chart for installation of core diego components
     digest: c4d3e990de13d524b6ae97232852e4bf61daf220b62e64f792ced48d82ff1239
     name: diego-core
@@ -24,7 +24,7 @@ entries:
   webservice:
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2022-07-04T15:21:28.908667+01:00"
+    created: "2022-07-04T16:45:24.675664+01:00"
     description: A Helm chart for Kubernetes
     digest: d59158ec10507cede72ab39bf3a47d5984bac77244f7a68b674774031cffb54f
     icon: https://techamigos.co/wp-content/uploads/2020/01/favicon.png
@@ -35,7 +35,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2022-07-04T15:21:28.907476+01:00"
+    created: "2022-07-04T16:45:24.673941+01:00"
     description: A Helm chart for Kubernetes
     digest: 7d21b602c2ab69f43dac0b34455776fd374a6a950a17cc1a9dcc427ac69111d8
     icon: https://techamigos.co/wp-content/uploads/2020/01/favicon.png
@@ -44,4 +44,4 @@ entries:
     urls:
     - https://diego-cloud-io.github.io/helm-charts/webservice-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-04T15:21:28.900776+01:00"
+generated: "2022-07-04T16:45:24.668527+01:00"
