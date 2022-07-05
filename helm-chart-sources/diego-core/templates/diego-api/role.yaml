@@ -12,6 +12,7 @@ rules:
   - get
   - list
   - watch
+  - create
 - apiGroups:
   - management.diegocloud.io
   resources:
