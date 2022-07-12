@@ -31,3 +31,81 @@ rules:
   - get
   - patch
   - update
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - applicationversions
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - applicationversions/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - applicationversions/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - environments
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - environments/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - environments/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - previewenvironments
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - previewenvironments/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - previewenvironments/status
+  verbs:
+  - get
+  - patch
+  - update
