@@ -24,6 +24,7 @@ diegoapi:
     tag: main
 
 diego_application_controller:
+  feature_enabled_environments: "false"
   image:
     repository: diegocloudio/application-controller
     tag: main
