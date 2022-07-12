@@ -3,9 +3,9 @@ entries:
   diego-core:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-07-12T18:13:45.224043+01:00"
+    created: "2022-07-12T18:16:15.214+01:00"
     description: A Helm chart for installation of core diego components
-    digest: b2cc5f3a03b33a427815f5e0e0031ffb9dff1572db723bc983cd56e9f211f4e8
+    digest: 51565431b3981d632631690129af1f3626eacf23f2e7293f45983380163768a2
     name: diego-core
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-07-12T18:13:45.223582+01:00"
+    created: "2022-07-12T18:16:15.213455+01:00"
     description: A Helm chart for installation of core diego components
     digest: d405b7df6a6e9b26e85d7c675fe84fd0c3447343454094e0b5fd84c9a9d956f3
     name: diego-core
@@ -23,7 +23,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-07-12T18:13:45.223122+01:00"
+    created: "2022-07-12T18:16:15.212996+01:00"
     description: A Helm chart for installation of core diego components
     digest: c4d3e990de13d524b6ae97232852e4bf61daf220b62e64f792ced48d82ff1239
     name: diego-core
@@ -34,7 +34,7 @@ entries:
   webservice:
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2022-07-12T18:13:45.225058+01:00"
+    created: "2022-07-12T18:16:15.215521+01:00"
     description: A Helm chart for Kubernetes
     digest: d59158ec10507cede72ab39bf3a47d5984bac77244f7a68b674774031cffb54f
     icon: https://techamigos.co/wp-content/uploads/2020/01/favicon.png
@@ -45,7 +45,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2022-07-12T18:13:45.224545+01:00"
+    created: "2022-07-12T18:16:15.214481+01:00"
     description: A Helm chart for Kubernetes
     digest: 7d21b602c2ab69f43dac0b34455776fd374a6a950a17cc1a9dcc427ac69111d8
     icon: https://techamigos.co/wp-content/uploads/2020/01/favicon.png
@@ -54,4 +54,4 @@ entries:
     urls:
     - https://diego-cloud-io.github.io/helm-charts/webservice-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-12T18:13:45.222401+01:00"
+generated: "2022-07-12T18:16:15.212287+01:00"

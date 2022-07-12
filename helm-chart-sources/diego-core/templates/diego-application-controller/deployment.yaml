@@ -63,7 +63,7 @@ spec:
               key: installation_id
               optional: false
         - name: FEATURE_ENABLE_ENVIRONMENTS
-          value: {{ .Values.diego_application_controller.feature_enabled_environment }}
+          value: {{ .Values.diego_application_controller.feature_enabled_environments }}
         ports:
         - containerPort: 9443
           name: webhook-server
