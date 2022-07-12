@@ -3,9 +3,9 @@ entries:
   diego-core:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-07-12T18:29:30.43647+01:00"
+    created: "2022-07-12T18:34:30.767238+01:00"
     description: A Helm chart for installation of core diego components
-    digest: a27b07260617a4df05a949e992f4a321db89f17ee33606aeffb6ddb1e8d8a3a5
+    digest: 2c9304d164f5e7307e61633122d925d4723d4d3de77b46165fcd87d9655372bb
     name: diego-core
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-07-12T18:29:30.435788+01:00"
+    created: "2022-07-12T18:34:30.766672+01:00"
     description: A Helm chart for installation of core diego components
     digest: d405b7df6a6e9b26e85d7c675fe84fd0c3447343454094e0b5fd84c9a9d956f3
     name: diego-core
@@ -23,7 +23,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-07-12T18:29:30.434381+01:00"
+    created: "2022-07-12T18:34:30.766068+01:00"
     description: A Helm chart for installation of core diego components
     digest: c4d3e990de13d524b6ae97232852e4bf61daf220b62e64f792ced48d82ff1239
     name: diego-core
@@ -34,7 +34,7 @@ entries:
   webservice:
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2022-07-12T18:29:30.439298+01:00"
+    created: "2022-07-12T18:34:30.768323+01:00"
     description: A Helm chart for Kubernetes
     digest: d59158ec10507cede72ab39bf3a47d5984bac77244f7a68b674774031cffb54f
     icon: https://techamigos.co/wp-content/uploads/2020/01/favicon.png
@@ -45,7 +45,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2022-07-12T18:29:30.437756+01:00"
+    created: "2022-07-12T18:34:30.767771+01:00"
     description: A Helm chart for Kubernetes
     digest: 7d21b602c2ab69f43dac0b34455776fd374a6a950a17cc1a9dcc427ac69111d8
     icon: https://techamigos.co/wp-content/uploads/2020/01/favicon.png
@@ -54,4 +54,4 @@ entries:
     urls:
     - https://diego-cloud-io.github.io/helm-charts/webservice-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-12T18:29:30.43148+01:00"
+generated: "2022-07-12T18:34:30.765333+01:00"
