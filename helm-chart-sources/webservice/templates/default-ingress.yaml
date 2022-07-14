@@ -1,0 +1,41 @@
+{{- if .Values.defaultIngress.enabled -}}
+{{- $fullName := include "webservice.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1
+{{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1beta1
+{{- else -}}
+apiVersion: extensions/v1beta1
+{{- end }}
+kind: Ingress
+metadata:
+  name: {{ $fullName }}-default
+  labels:
+    {{- include "webservice.labels" . | nindent 4 }}
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: /
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+spec:
+  ingressClassName: alb
+  tls:
+  - hosts:
+    - {{ .Values.defaultIngress.host}}
+  rules:
+  - host: {{ .Values.defaultIngress.host}}
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+          service:
+            name: {{ $fullName }}
+            port:
+              number: {{ $svcPort }}
+          {{- else }}
+          serviceName: {{ $fullName }}
+          servicePort: {{ $svcPort }}
+          {{- end }}
+{{- end }}
