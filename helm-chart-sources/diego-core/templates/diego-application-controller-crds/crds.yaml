@@ -246,27 +246,19 @@ spec:
           status:
             description: EnvironmentStatus defines the observed state of Environment
             properties:
-              pushedApplications:
-                items:
+              applications:
+                additionalProperties:
                   properties:
-                    applicationVersion:
-                      type: string
                     ingressHost:
-                       type: string
-                    name:
                       type: string
-                    overrideValues:
+                    versionName:
                       type: string
-                    pushedFiles:
-                      items:
-                        type: string
-                      type: array
-                  required:
-                  - applicationVersion
-                  - name
-                  - overrideValues
                   type: object
-                type: array
+                type: object
+              pushedFiles:
+                additionalProperties:
+                  type: string
+                type: object
             type: object
         type: object
     served: true
