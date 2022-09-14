@@ -1,12 +1,12 @@
-{{- range $name, $hook := .Values.hooks -}}
+{{- range $hookName, $hookDefinition := .Values.hooks -}}
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ $name }}
+  name: {{ $hookName }}
   annotations:
-    argocd.argoproj.io/hook: {{ $hook.phase }}
-    argocd.argoproj.io/sync-wave: '{{ $hook.wave }}'
+    argocd.argoproj.io/hook: {{ $hookDefinition.phase }}
+    argocd.argoproj.io/sync-wave: '{{ $hookDefinition.wave }}'
 spec:
   ttlSecondsAfterFinished: 600
   template:
@@ -14,7 +14,7 @@ spec:
       containers:
       - name: main
         image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
-        command: {{ $hook.command | toJson }}
+        command: {{ $hookDefinition.command | toJson }}
 {{- if $.Values.env.config}}
         envFrom:
         - configMapRef:
