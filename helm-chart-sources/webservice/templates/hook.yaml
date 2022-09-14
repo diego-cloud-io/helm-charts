@@ -3,7 +3,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ $hookName }}
+  generateName: {{ $hookName }}-
   annotations:
     argocd.argoproj.io/hook: {{ $hookDefinition.phase }}
     argocd.argoproj.io/sync-wave: '{{ $hookDefinition.wave }}'
