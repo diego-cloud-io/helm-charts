@@ -104,7 +104,7 @@ hooks: {}
 # # that will execute the command in the same environment as
 # # defined in env.config
   # migrate:
-  #   phase: preSync # Sync, PostSync etc
+  #   phase: PreSync # Sync, PostSync etc
   #   wave: -5
   #   command: ["python", "manage.py", "migrate"]
  

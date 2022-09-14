@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: {{ include "webservice.fullname" . }}
   annotations:
-    argocd.argoproj.io/hook: preSync
+    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: -1000
 data:
 {{.Values.env.config | toYaml | indent 2}}
