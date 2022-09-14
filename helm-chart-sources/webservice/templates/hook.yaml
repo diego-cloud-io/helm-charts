@@ -1,13 +1,12 @@
-{{- range $phase, $hooks := .Values.hooks -}}
-{{- range $hook := $hooks -}}
+{{- range $name, $hook := .Values.hooks -}}
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ $hook.name }}
+  name: {{ $name }}
   annotations:
-    argocd.argoproj.io/hook: {{ $phase }}
-    argocd.argoproj.io/sync-wave: "{{ $hook.wave }}" 
+    argocd.argoproj.io/hook: {{ $hook.phase }}
+    argocd.argoproj.io/sync-wave: '{{ $hook.wave }}'
 spec:
   ttlSecondsAfterFinished: 600
   template:
