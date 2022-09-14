@@ -1,0 +1,25 @@
+{{- range $hookName, $hookDefinition := .Values.hooks -}}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: {{ $hookName }}-
+  annotations:
+    argocd.argoproj.io/hook: {{ $hookDefinition.phase }}
+    argocd.argoproj.io/sync-wave: '{{ $hookDefinition.wave }}'
+spec:
+  ttlSecondsAfterFinished: 600
+  template:
+    spec:
+      containers:
+      - name: main
+        image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+        command: {{ $hookDefinition.command | toJson }}
+{{- if $.Values.env.config}}
+        envFrom:
+        - configMapRef:
+            name: {{ include "webservice.fullname" $ }}
+{{- end}}
+      restartPolicy: Never
+  backoffLimit: 6
+{{ end }}

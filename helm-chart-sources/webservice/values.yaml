@@ -99,6 +99,15 @@ affinity: {}
 
 # priorityClassName: 
 
+hooks: {}
+# # we can place simple hooks here in a phase and wave
+# # that will execute the command in the same environment as
+# # defined in env.config
+  # migrate:
+  #   phase: preSync # Sync, PostSync etc
+  #   wave: -5
+  #   command: ["python", "manage.py", "migrate"]
+ 
 env:
   # default sets for pre-canned values and non-literals.
   defaultSets:
