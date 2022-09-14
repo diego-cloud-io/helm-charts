@@ -23,4 +23,3 @@ spec:
       restartPolicy: Never
   backoffLimit: 6
 {{ end }}
-{{ end }}
