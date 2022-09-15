@@ -256,7 +256,7 @@ spec:
                           type: boolean
                         found:
                           type: boolean
-                        healthly:
+                        healthy:
                           type: boolean
                         synced:
                           type: boolean
@@ -264,7 +264,7 @@ spec:
                       - complete
                       - current
                       - found
-                      - healthly
+                      - healthy
                       - synced
                       type: object
                     type: object
