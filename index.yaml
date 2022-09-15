@@ -3,7 +3,17 @@ entries:
   diego-core:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-09-14T20:36:53.490273+01:00"
+    created: "2022-09-14T15:17:30.916015+01:00"
+    description: A Helm chart for installation of core diego components
+    digest: 392bc0489cf66dba025e01b54e7e5dfb5b8c13e5216e5e7ac221a67581b8e9a7
+    name: diego-core
+    type: application
+    urls:
+    - https://diego-cloud-io.github.io/helm-charts/diego-core-0.7.0.tgz
+    version: 0.7.0
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-09-14T15:17:30.915269+01:00"
     description: A Helm chart for installation of core diego components
     digest: 7ac5c850da559f1cd30aafee8cc68015dcd79c8328417c1e94cb4e5cc46bc0c9
     name: diego-core

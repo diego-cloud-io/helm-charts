@@ -6,6 +6,14 @@ metadata:
   name: diego-application-manager-role
 rules:
 - apiGroups:
+   - argoproj.io
+   resources:
+   - applications
+   verbs:
+   - get
+   - list
+   - watch
+- apiGroups:
   - management.diegocloud.io
   resources:
   - applications

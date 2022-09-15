@@ -244,20 +244,51 @@ spec:
                 type: array
             type: object
           status:
-            description: EnvironmentStatus defines the observed state of Environment
             properties:
-              applications:
-                additionalProperties:
-                  properties:
-                    ingressHost:
-                      type: string
-                    versionName:
-                      type: string
-                  type: object
+              deploy:
+                properties:
+                  applications:
+                    additionalProperties:
+                      properties:
+                        complete:
+                          type: boolean
+                        current:
+                          type: boolean
+                        found:
+                          type: boolean
+                        healthly:
+                          type: boolean
+                        synced:
+                          type: boolean
+                      required:
+                      - complete
+                      - current
+                      - found
+                      - healthly
+                      - synced
+                      type: object
+                    type: object
                 type: object
-              pushedFiles:
-                additionalProperties:
-                  type: string
+              push:
+                description: EnvironmentStatus defines the observed state of Environment
+                properties:
+                  applications:
+                    additionalProperties:
+                      properties:
+                        imageTagMatch:
+                          type: string
+                        ingressHost:
+                          type: string
+                        versionName:
+                          type: string
+                      required:
+                      - imageTagMatch
+                      type: object
+                    type: object
+                  files:
+                    additionalProperties:
+                      type: string
+                    type: object
                 type: object
             type: object
         type: object
