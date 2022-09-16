@@ -363,11 +363,11 @@ spec:
           status:
             description: PreviewEnvironmentStatus defines the observed state of PreviewEnvironment
             properties:
+              githubCommentHash:
+                type: string
               githubCommentID:
                 format: int64
                 type: integer
-            required:
-            - githubCommentID
             type: object
         type: object
     served: true
