@@ -135,20 +135,19 @@ env:
   externalSecrets: {}
   # # externalSecrets are a little more complicated, but
   # # follow a similar pattern. We provide the complete ExternalSecret
-  # # spec against a key to the secret/external-secret name. The data
-  # # name values are the resulting environment variable name.
-    # my-secrets: # name of the secret
-    #   envMapping:
-    #     DATABASE_PASSWORD: my_secret2_thing
+  # # spec. See the External Secrets Operator docs for spec schema, below 
+    # is just an example
+    # my-api-secret: # name of the secret
     #   spec:
-    #     backendType: "secretsManager" # ExternalSecret spec
-    #     roleArn: "arn:aws:iam::848956251477:role/kubesecrets"
-    #     data:
-    #       - key: "arn:aws:secretsmanager:eu-west-1:000000000000:secret:my_secret1"
-    #         name: "my_secret1" # Resulting env var
-    #       - key: "arn:aws:secretsmanager:eu-west-1:000000000000:secret:my_secret2"
-    #         name: "my_secret2_thing"
-    #       - key: "arn:aws:secretsmanager:eu-west-1:000000000000:secret:my_secret3"
-    #         name: "ANOTHER_ENV_VAR_FOR_APP2"
-      #this is the external secret spec, however, only the 'data' ones are automatically mapped.
+    #     my-api-key:
+    #       spec:
+    #         secretStoreRef:
+    #           name: secret-store
+    #           kind: SecretStore
+    #         target:
+    #           deletionPolicy: Delete
+    #         data:
+    #           - secretKey: MY_API_KEY
+    #             remoteRef:
+    #               key: somepath/MY_API_KEY
 # TODO : look at mapping the envVars directly from data k-v pairs into statefulset env.
