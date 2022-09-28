@@ -40,47 +40,11 @@ spec:
             - name: http
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
-          {{- if or .Values.env.config .Values.env.secrets .Values.env.externalSecrets }}
           envFrom:
-          {{- if .Values.env.config }}
           - configMapRef:
-              name: {{ include "webservice.fullname" . }}
-          {{- end}}
-          {{- if .Values.env.secrets }}
+              name: {{ include "configs.name" . }}
           - secretRef:
-              name: {{ include "webservice.fullname" . }}
-          {{- end}}
-          {{- end}}
-          env:
-          {{- if .Values.env.externalSecrets }}
-          {{- range $secretName, $val := .Values.env.externalSecrets }}
-          {{- range $envVar, $secretKey := $val.envMapping }}
-          - name: {{ $envVar }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ include "webservice.fullname" $ }}-{{ $secretName }}
-                key: {{ $secretKey }}
-          {{- end}}
-          {{- end}}
-          {{- end}}
-          {{- if .Values.env.defaultSets.otelCollectorAgent.enabled }}
-          - name: OTEL_COLLECTOR_HOST
-            valueFrom:
-              fieldRef:
-                fieldPath: status.hostIP
-          - name: OTEL_COLLECTOR_PORT_HTTP
-            value: "4318"
-          - name: OTEL_COLLECTOR_PORT_GRPC
-            value: "4317"
-          {{- end}}
-          {{- if .Values.env.defaultSets.jaegerDaemonsetAgent.enabled }}
-          - name: JAEGER_AGENT_HOST
-            valueFrom:
-              fieldRef:
-                fieldPath: status.hostIP
-          - name: JAEGER_AGENT_PORT
-            value: {{ .Values.env.defaultSets.jaegerDaemonsetAgent.port | quote }}
-          {{- end}}
+              name: {{ include "configs.name" . }}
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:

@@ -1,11 +1,13 @@
-{{- if .Values.env.config}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "webservice.fullname" . }}
+  name: {{ include "configs.name" . }}
   annotations:
     argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: '-1000'
 data:
-{{.Values.env.config | toYaml | indent 2}}
+{{- range $key , $val := .Values.env }}
+{{- if and (ne $val.value "") (ne $val.value nil) }}
+  {{ $key }}: {{ $val.value | quote }}
+{{- end}}
 {{- end}}

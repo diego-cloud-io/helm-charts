@@ -107,47 +107,9 @@ hooks: {}
   #   phase: PreSync # Sync, PostSync etc
   #   wave: -5
   #   command: ["python", "manage.py", "migrate"]
- 
-env:
-  # default sets for pre-canned values and non-literals.
-  defaultSets:
-    jaegerDaemonsetAgent:
-      enabled: true
-      port: 6831
-    otelCollectorAgent:
-      enabled: true
-      
-  config: {}
-  # # we can place defaults here in following form:
-  # config:
-  #   ENV_VAR_NAME: value
 
-  secrets: {}
-  # # we can place default secrets here in following form:
-  # secrets:
-  #   ENV_VAR_NAME: $ { secrets.getValue("my-secret") }
-
-  # TODO verify and document immutability constraints, and deployment ordering.
-  # we can apply these external secrets in advance. The challenge is the use
-  # of external secrets controller which may take several minutes to create
-  # underlying secret. This, in turn, gives us a gap which will be noticable on
-  # UPDATE - i.e. the pods will start before the secret is updated.
-  externalSecrets: {}
-  # # externalSecrets are a little more complicated, but
-  # # follow a similar pattern. We provide the complete ExternalSecret
-  # # spec. See the External Secrets Operator docs for spec schema, below 
-    # is just an example
-    # my-api-secret: # name of the secret
-    #   spec:
-    #     my-api-key:
-    #       spec:
-    #         secretStoreRef:
-    #           name: secret-store
-    #           kind: SecretStore
-    #         target:
-    #           deletionPolicy: Delete
-    #         data:
-    #           - secretKey: MY_API_KEY
-    #             remoteRef:
-    #               key: somepath/MY_API_KEY
-# TODO : look at mapping the envVars directly from data k-v pairs into statefulset env.
+env: {}
+  # MY_ENV_VAR:
+  #   value: "hello"
+  # MY_SECRET_THING:
+  #   secretPath: /prod/blah
