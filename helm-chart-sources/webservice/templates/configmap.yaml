@@ -7,7 +7,7 @@ metadata:
     argocd.argoproj.io/sync-wave: '-1000'
 data:
 {{- range $key , $val := .Values.env }}
-{{- if and (ne $val.value "") (ne $val.value nil) }}
+{{- if (ne $val.value nil) }}
   {{ $key }}: {{ $val.value | quote }}
 {{- end}}
 {{- end}}

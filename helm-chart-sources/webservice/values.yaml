@@ -113,3 +113,4 @@ env: {}
   #   value: "hello"
   # MY_SECRET_THING:
   #   secretPath: /prod/blah
+  #   version: 1
