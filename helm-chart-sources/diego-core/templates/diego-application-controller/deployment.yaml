@@ -72,6 +72,8 @@ spec:
           value: {{ .Values.diego_application_controller.ingress_host_domain | quote }}
         - name: ARGOCD_HOST
           value: {{ .Values.diego_application_controller.argocd_host | quote }}
+        - name: AWS_ACTIONS_ROLE_ARN
+          value: {{ .Values.diego_application_controller.aws_actions_role_arn | quote }}
         ports:
         - containerPort: 9443
           name: webhook-server
