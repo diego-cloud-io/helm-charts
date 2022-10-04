@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: diego-application-viewer-role
+  name: diego-api-role
 rules:
 - apiGroups:
   - management.diegocloud.io
@@ -19,13 +19,6 @@ rules:
   - applications/status
   verbs:
   - get
----
-# permissions for end users to createa and manage environments.
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: diego-environment-manager-role
-rules:
 - apiGroups:
   - management.diegocloud.io
   resources:
@@ -41,4 +34,5 @@ rules:
   - environments/status
   verbs:
   - get
+
   
