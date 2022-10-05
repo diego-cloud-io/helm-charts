@@ -3,8 +3,7 @@ kind: ConfigMap
 metadata:
   name: {{ include "configs.name" . }}
   annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: '-1000'
+    argocd.argoproj.io/sync-wave: '-10' 
 data:
 {{- range $key , $val := .Values.env }}
 {{- if (ne $val.value nil) }}
