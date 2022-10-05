@@ -99,14 +99,15 @@ affinity: {}
 
 # priorityClassName: 
 
-hooks: {}
+hooks: 
 # # declare hook jobs to run a command in a phase and wave. 
 # # the job's environment includes the main configMap and secret 
 # # created by the chart
-  # migrate:
-  #   phase: Sync # Sync, PostSync etc
-  #   wave: -5
-  #   command: ["python", "manage.py", "migrate"]
+  migrate:
+    phase: Sync # Sync, PostSync etc
+    wave: -5
+    command: ["python", "manage.py", "migrate"]
+    hookDeletePolicy: BeforeHookCreation # optional, argocd default is BeforeHookCreation
 
 env: {}
   # MY_ENV_VAR:
