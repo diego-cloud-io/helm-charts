@@ -4,10 +4,13 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: {{ $hookName }}-
+  name: {{ $hookName }}
   annotations:
     argocd.argoproj.io/hook: {{ $hookDefinition.phase }}
     argocd.argoproj.io/sync-wave: '{{ $hookDefinition.wave }}'
+{{- if $hookDefinition.hookDeletePolicy  }} 
+    argocd.argoproj.io/hook-delete-policy: {{ $hookDefinition.hookDeletePolicy }}
+{{- end }}    
 spec:
   ttlSecondsAfterFinished: 600
   template:
