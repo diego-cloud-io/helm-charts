@@ -16,11 +16,11 @@ spec:
       - name: main
         image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
         command: {{ $hookDefinition.command | toJson }}
-{{- if $.Values.env.config}}
         envFrom:
         - configMapRef:
-            name: {{ include "webservice.fullname" $ }}
-{{- end}}
+            name: {{ include "configs.name" $ }}
+        - secretRef:
+            name: {{ include "configs.name" $ }}
       restartPolicy: Never
   backoffLimit: 6
 {{ end }}
