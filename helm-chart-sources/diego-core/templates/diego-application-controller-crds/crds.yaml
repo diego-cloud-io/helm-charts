@@ -207,6 +207,8 @@ spec:
           spec:
             description: EnvironmentSpec defines the desired state of Environment
             properties:
+              appNamePrefix:
+                type: string
               applications:
                 items:
                   properties:
