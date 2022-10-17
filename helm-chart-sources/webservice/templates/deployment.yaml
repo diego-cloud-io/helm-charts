@@ -43,8 +43,6 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ include "configs.name" . }}
-          - secretRef:
-              name: {{ include "configs.name" . }}
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
