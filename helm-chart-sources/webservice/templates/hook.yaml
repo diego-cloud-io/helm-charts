@@ -22,6 +22,8 @@ spec:
         envFrom:
         - configMapRef:
             name: {{ include "configs.name" $ }}
+        - secretRef:
+            name: {{ include "configs.name" $ }}
       restartPolicy: Never
   backoffLimit: 6
 {{ end }}
