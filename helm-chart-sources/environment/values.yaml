@@ -1,8 +1,2 @@
-# Default values for webservice.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-# defines the name of the namespace; required
-# name: myenv
-
 # the role (arn) to assume when accessing the secret store
-# secrets_role_arn: arn:aws:iam::123456789012:role/application_abc/component_xyz/SecretsAccess
+# secrets_role_arn: arn:aws:iam::123456789012:role/DiegoAppSecretsReader_core_previews_12387412879
