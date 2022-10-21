@@ -6,11 +6,8 @@ kind: Job
 metadata:
   name: {{ $hookName }}
   annotations:
-    argocd.argoproj.io/hook: {{ $hookDefinition.phase }}
+    argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: '{{ $hookDefinition.wave }}'
-{{- if $hookDefinition.hookDeletePolicy  }} 
-    argocd.argoproj.io/hook-delete-policy: {{ $hookDefinition.hookDeletePolicy }}
-{{- end }}    
 spec:
   ttlSecondsAfterFinished: 600
   template:

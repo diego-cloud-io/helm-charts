@@ -99,15 +99,13 @@ affinity: {}
 
 # priorityClassName: 
 
+# A map of conformed ArgoCD hooks. Hooks run in the specified wave in the Sync phase. 
+# For reference, the configMap and Secrets genereted by this chart will be created by 
+# ArgoCD in the Sync phase with a wave value of -1000
 hooks: {}
-# # declare hook jobs to run a command in a phase and wave. 
-# # the job's environment includes the main configMap and secret 
-# # created by the chart
   # migrate:
-  #   phase: Sync # Sync, PostSync etc
-  #   wave: -5
+  #   wave: -10
   #   command: ["python", "manage.py", "migrate"]
-  #   hookDeletePolicy: BeforeHookCreation # optional, argocd default is BeforeHookCreation
 
 env: {}
   # MY_ENV_VAR:
