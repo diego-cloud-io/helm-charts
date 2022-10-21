@@ -9,7 +9,7 @@ metadata:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: '{{ $hookDefinition.wave }}'
 spec:
-  ttlSecondsAfterFinished: 600
+  ttlSecondsAfterFinished: 7200
   template:
     spec:
       containers:
