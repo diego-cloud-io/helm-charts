@@ -1,3 +1,4 @@
+{{- $top := . -}}
 {{- range $hookName, $hookDefinition := .Values.hooks -}}
 {{- if $hookDefinition -}}
 ---
@@ -17,7 +18,7 @@ spec:
         image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
         command: {{ $hookDefinition.command | toJson }}
         env:
-          {{- include "configs.env" . | nindent 10 }}
+          {{- include "configs.env" $top | nindent 10 }}
       restartPolicy: Never
   backoffLimit: 6
 {{ end }}
