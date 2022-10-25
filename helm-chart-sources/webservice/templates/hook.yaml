@@ -16,11 +16,8 @@ spec:
       - name: main
         image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
         command: {{ $hookDefinition.command | toJson }}
-        envFrom:
-        - configMapRef:
-            name: {{ include "configs.name" $ }}
-        - secretRef:
-            name: {{ include "configs.name" $ }}
+        env:
+          {{- include "configs.env" . | nindent 10 }}
       restartPolicy: Never
   backoffLimit: 6
 {{ end }}
