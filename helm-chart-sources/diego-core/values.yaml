@@ -19,7 +19,7 @@ diego_application_controller_webhooks:
 
 diegoapi:
   # host: diego-api.core.example.com
-  aws_diego_api_role_arn: "arn:aws:iam::1234567890:role/DiegoApiRole"
+  # aws_diego_api_role_arn: # e.g. arn:aws:iam::1234567890:role/DiegoApiRole
   image:
     repository: diegocloudio/diego-api
     tag: main
