@@ -1,0 +1,90 @@
+{{- if .Values.diego_application_controller_crds.enabled -}}
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: previewenvironments.management.diegocloud.io
+spec:
+  group: management.diegocloud.io
+  names:
+    kind: PreviewEnvironment
+    listKind: PreviewEnvironmentList
+    plural: previewenvironments
+    singular: previewenvironment
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: PreviewEnvironment is the Schema for the previewenvironments
+          API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: PreviewEnvironmentSpec defines the desired state of PreviewEnvironment
+            properties:
+              source:
+                properties:
+                  applicationName:
+                    type: string
+                  branch:
+                    type: string
+                  currentCommitMergeSha:
+                    type: string
+                  currentCommitSha:
+                    type: string
+                  githubPr:
+                    properties:
+                      number:
+                        type: integer
+                      url:
+                        type: string
+                    type: object
+                  githubRepo:
+                    properties:
+                      name:
+                        type: string
+                      owner:
+                        type: string
+                    required:
+                    - name
+                    - owner
+                    type: object
+                required:
+                - applicationName
+                - branch
+                - githubPr
+                - githubRepo
+                type: object
+            required:
+            - source
+            type: object
+          status:
+            description: PreviewEnvironmentStatus defines the observed state of PreviewEnvironment
+            properties:
+              githubCommentHash:
+                type: string
+              githubCommentID:
+                format: int64
+                type: integer
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+{{- end -}}
