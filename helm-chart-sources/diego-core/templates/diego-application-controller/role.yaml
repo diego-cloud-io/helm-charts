@@ -42,7 +42,7 @@ rules:
 - apiGroups:
   - management.diegocloud.io
   resources:
-  - applicationversions
+  - versions
   verbs:
   - create
   - delete
@@ -54,13 +54,39 @@ rules:
 - apiGroups:
   - management.diegocloud.io
   resources:
-  - applicationversions/finalizers
+  - versions/finalizers
   verbs:
   - update
 - apiGroups:
   - management.diegocloud.io
   resources:
-  - applicationversions/status
+  - versions/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - approvals
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - approvals/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - approvals/status
   verbs:
   - get
   - patch
