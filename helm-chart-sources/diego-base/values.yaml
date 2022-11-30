@@ -34,7 +34,7 @@ argo-cd:
           name: Dex          
           issuer: # required, https://argocd.diego.{{{ DOMAIN }}}
           clientID: argocd
-          clientSecret: $argocd-oidc:client_secret
+          clientSecret: argocd-oauth:client_secret
           requestedScopes: ["openid", "profile", "email", "groups"]
           requestedIDTokenClaims: {"groups": {"essential": true}}
       resource.customizations.health.infra.diegocloud.io_Component: |
