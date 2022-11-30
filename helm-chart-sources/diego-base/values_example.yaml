@@ -78,7 +78,7 @@ argo-cd:
     rbac:
       policy.default: role:admin
     secret: 
-      argocdServerAdminPassword:
+      argocdServerAdminPassword: 
   dex:
     enabled: false  
 
@@ -87,7 +87,7 @@ dex:
   clientSecret: "ertrtgtrthryh"
 
 github:
-  orgName: diegotest1
+  orgName: ta-diegotest1
   repoName: default-project
   appInstallId: "2343534"
   appId: "34667"
