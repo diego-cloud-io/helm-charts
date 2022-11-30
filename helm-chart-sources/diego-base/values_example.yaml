@@ -6,6 +6,10 @@ fullnameOverride: ""
 
 domain: diegotest.com
 
+repositories:
+  - diego-tooling
+  - diego-default-project
+
 argo-cd:
   server:
     ingressGrpc:
@@ -69,13 +73,9 @@ argo-cd:
     rbac:
       policy.default: role:admin
     secret: 
-      argocdServerAdminPassword: "somepassedinvalue"
+      argocdServerAdminPassword:
   dex:
     enabled: false  
-
-argocd:
-  user: admin
-  password: "mypassword"
 
 dex:
   clientId: "lx:4rgrgdh"

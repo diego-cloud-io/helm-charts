@@ -1,0 +1,18 @@
+{{- range .Values.repositories }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-{{ . }}
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  githubAppID: {{ required "Missing .Values.github.appInstallId" $.Values.github.appId | quote }}
+  githubAppInstallationID: {{ required "Missing .Values.github.appInstallId" $.Values.github.appInstallId | quote }}
+  project: default
+  type: git
+  url: "https://github.com/{{ required "Missing .Values.gitHub.orgName" $.Values.github.orgName }}/{{ . }}.git"
+  githubAppPrivateKey: |
+{{ required "Missing .Values.github.appPemKey" $.Values.github.appPemKey | indent 4 }}
+---
+{{- end }}    
