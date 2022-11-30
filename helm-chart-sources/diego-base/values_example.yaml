@@ -1,0 +1,116 @@
+# Default values for diego-base.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+nameOverride: ""
+fullnameOverride: ""
+
+domain: diegotest.com
+
+argo-cd:
+  server:
+    ingressGrpc:
+      enabled: true
+      isAWSALB: true
+      awsALB:
+        serviceType: ClusterIP
+    ingress:
+      enabled: true
+      annotations: 
+        alb.ingress.kubernetes.io/scheme: internet-facing
+        alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+        alb.ingress.kubernetes.io/backend-protocol: HTTPS
+        alb.ingress.kubernetes.io/target-type: ip
+      ingressClassName: alb
+
+      hosts:
+      - argocd.diego.diegotest1.com
+      tls: 
+      - hosts:
+        - argocd.diego.diegotest1.com
+  configs:
+    cm:    
+      url: https://argocd.diego.diegotest1.com
+      oidc.config: |
+          name: Dex
+          issuer: https://argocd.diego.diegotest1.com
+          clientID: argocd
+          clientSecret: argocd-oauth:client_secret
+          requestedScopes: ["openid", "profile", "email", "groups"]
+          requestedIDTokenClaims: {"groups": {"essential": true}}
+      resource.customizations.health.infra.diegocloud.io_Component: |
+        hs = {}
+        hs.status = "Progressing" 
+        if obj.status ~= nil then
+          if obj.status.hasErrors == true then
+            hs.status = "Degraded"
+            hs.message = "Errors during reconciliation"
+          elseif obj.status.hasChanges == false then
+            hs.status = "Healthy"
+            hs.message = "Up-to-date"
+          else
+            hs.status = "Progressing" 
+            hs.message = "Pending approval"
+          end
+        end
+        return hs
+      resource.customizations.actions.infra.diegocloud.io_Component: |
+        discovery.lua: |
+          actions = {}
+          actions["approve"] = {["disabled"] = true}
+          if obj.status.hasChanges and obj.metadata.annotations["infra.diegocloud.io/last-approval"] ~= obj.status.requiredApproval then
+              actions["approve"]["disabled"] = false
+          end
+          return actions
+        definitions:
+        - name: approve
+          action.lua: |
+            obj.metadata.annotations["infra.diegocloud.io/last-approval"] = obj.status.requiredApproval
+            return obj
+    rbac:
+      policy.default: role:admin
+    secret: 
+      argocdServerAdminPassword: "somepassedinvalue"
+  dex:
+    enabled: false  
+
+argocd:
+  user: admin
+  password: "mypassword"
+
+dex:
+  clientId: "lx:4rgrgdh"
+  clientSecret: "ertrtgtrthryh"
+
+github:
+  orgName: diegotest1
+  repoName: default-project
+  appInstallId: "2343534"
+  appId: "34667"
+  appPemKey: |
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEpQIBAAKCAQEAu454ghy0KTUMvPsN9fk5Bq21QMV2VoDCawcAekWG8pcK3IpL
+    0iVxP+mnD3PjdrHzE+6U4GWL9uuA3RwPMGCZMcSfiGRe8rklKWbasFlJhgembpla
+    3EICjiH9p4K6LOr2PgFhUEj4p1ItUqUp3YX16k5hiMt4u8w4KjDCnaq5XTpxDqz8
+    yJIkU9NRC3pZoe/VQREFizBDWcS3luTvr/E5pdLikLQzsNrp2PuzrO3Pc01+bMtd
+    HZ1xO/7M2HzNgK3mhXP5pb0454ct45ccrPWLZRp/x4AVinoldxw8ow6mC6itJTZe
+    vdR6h1+h8vAkOUbDl3E8cAyC4CBVKb0NJZQBNQIDAQABAoIBAE+9UGdX4R2DV25y
+    ElCIezxsRffAUyEN7nJAPGGmU0dp9L/1J4t7O/1lBvE1uhZKGN4iZaZ7MNOMx9gL
+    6h4bP6awywmznd7d1fklnjMrEFoBsQxJoxbIJBFwNxT4EkyxP+C78TGCZZGK+5SQ
+    ZZ2NFPdiX10PCqKWXFb67fq90X7PbblFqX0LGEVYq6mBM4zLIUyd16gBhV0yHob2
+    vwytJGsE9O20KtT091q+SaccUn8y7oMZ515PMWXBImRakVvWFu/XSlpB+fqawnYi
+    0O+Ewl/hfSMXl/En/14/7uZXidlIRFUYtV3ZgNDsRv4GD5vL8M5gdWPcVfT3fVNl
+    6zgNGFkCgYEA21f3p/BV/iuuH/fuywPEu4MUndR0AEiawoLJgxawFsIpR+hAgZBa
+    YMA2ISmi5yABefEBHAx7rwirm+ChqW/GdPs4iExhgJfUNS4gbnSQKFh4Q1a5oISv
+    Cf1v1H49NQ9T0hF0NiPFtTc4ypRgtYVknnAof5e99XaVxcL/xSErX/8CgYEA21Fh
+    vXdCvxJR65fMnFC+zuxxpD/Y11JEyMEQOvy+aR/aSEhgBz9Xfs7RyxgklIZIAbQH
+    3sn4NV5mpmVfQiB8DA+m7B2KBJ4V2Fvid1yxvKEwww3GQ3RLbLgcQmGNAdn55G+G
+    ofpfyjTWs1ZEC1LFeWXLh27HkTYWrk376J0RHssCgYEAla6TJ7yfwkKmodQ81bet
+    olSSVh5sRuFFEyXTRCzQX8eCCjsZAhGzS0D/72ONcnHp8AAiRLTUFp8xFL+XMpw/
+    bwcdDg4pn2p8+wmOQjIzSgUNlM5zAHJrTMLxdK3tMO9TwQ/+IRAKVF7p13yn/leY
+    UXKygFfZ3s9c58bpaen3wpsCgYEAwbelbHPN6fVllIH1gdC0aRNh4WFfx/jrtqMJ
+    EgEysqom5RfAckZZozFND2XY0bO2IIMDPJ8K9SDX7Hu34zHMP98HYqFIyoFT7FJk
+    u2eNun5qEq+1AtnS0Unh9CQ0J4GAf2ye7622NGXtimRVH+dRc8QdPRf1gGbVK8rI
+    ChPKDncCgYEAlh5UtN20eyMsFPuYU0mdc3Z0A+dhUw+FB1K9+UZNxMRI47UvjEvm
+    0cR1fJ5m2Cp+xLwO5dYvLuGvCD/0NlMYbPNMc3+w5K5aZUfAQdGYXOODHRYsJjX/
+    uh15+2lZ764vFZi4afd0h7trpv5lZtqIeC4spAXIKfMTCgqWn5vX3x0=
+    -----END RSA PRIVATE KEY-----    
