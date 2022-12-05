@@ -4,7 +4,16 @@
 nameOverride: ""
 fullnameOverride: ""
 
+# The customer domain, e.g. acme.com. Diego componets will be installed using
+# the pattern {component}.diego.{domain}, e.g. argocd.diego.acme.com
 domain: diegotest.com
+
+# See https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#repositories
+# Each item in the list is used to generate a private repository using the Github App specified
+# with values under key "github" in this file
+repositories:
+  - diego-tooling
+  - diego-default-project
 
 argo-cd:
   server:
@@ -69,20 +78,16 @@ argo-cd:
     rbac:
       policy.default: role:admin
     secret: 
-      argocdServerAdminPassword: "somepassedinvalue"
+      argocdServerAdminPassword: 
   dex:
     enabled: false  
-
-argocd:
-  user: admin
-  password: "mypassword"
 
 dex:
   clientId: "lx:4rgrgdh"
   clientSecret: "ertrtgtrthryh"
 
 github:
-  orgName: diegotest1
+  orgName: ta-diegotest1
   repoName: default-project
   appInstallId: "2343534"
   appId: "34667"
