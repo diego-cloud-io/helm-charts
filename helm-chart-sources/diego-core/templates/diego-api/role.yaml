@@ -34,5 +34,19 @@ rules:
   - environments/status
   verbs:
   - get
-
+- apiGroups:	
+    - management.diegocloud.io	
+  resources:	
+    - approvals	
+  verbs:	
+    - get	
+    - list	
+    - create	
+- apiGroups:	
+    - management.diegocloud.io	
+  resources:	
+    - versions	
+  verbs:	
+    - list	
+    - get
   
