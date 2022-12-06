@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: diego-hub
+  labels:
+    app.kubernetes.io/instance: diego-hub
+    app.kubernetes.io/name: webservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: diego-hub
+      app.kubernetes.io/name: webservice
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: hub
+      labels:
+        app.kubernetes.io/instance: diego-hub
+        app.kubernetes.io/name: webservice
+    spec:
+      volumes: []
+      # securityContext:
+      #   runAsNonRoot: true
+      containers:
+      - image: {{ .Values.diegohub.image.repository }}:{{ .Values.diegohub.image.tag }}
+        name: diego-hub
+        volumeMounts: []
+        env: []
+        securityContext:
+          allowPrivilegeEscalation: false
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 1
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+      serviceAccountName: diego-hub
+      terminationGracePeriodSeconds: 10
