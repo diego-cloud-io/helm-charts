@@ -23,7 +23,7 @@ spec:
       # securityContext:
       #   runAsNonRoot: true
       containers:
-      - image: {{ .Values.diegohub.image.repository }}:{{ .Values.diegohub.image.tag }}
+      - image: {{ .Values.diego_hub.image.repository }}:{{ .Values.diego_hub.image.tag }}
         name: diego-hub
         volumeMounts: []
         env: []
