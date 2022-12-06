@@ -17,6 +17,11 @@ diego_application_controller_webhooks:
 # # set priority class
 # priorityClassName: 
 
+diego_hub:
+  image:
+    repository: diegocloudio/diego-hub
+    tag: main
+
 diegoapi:
   # host: diego-api.core.example.com
   # aws_diego_api_role_arn: # e.g. arn:aws:iam::1234567890:role/DiegoApiRole
