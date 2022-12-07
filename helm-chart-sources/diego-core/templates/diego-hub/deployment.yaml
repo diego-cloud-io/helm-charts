@@ -14,7 +14,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubectl.kubernetes.io/default-container: hub
+        kubectl.kubernetes.io/default-container: diego-hub
       labels:
         app.kubernetes.io/instance: diego-hub
         app.kubernetes.io/name: webservice

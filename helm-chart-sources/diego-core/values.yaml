@@ -25,6 +25,8 @@ diego_hub:
 diegoapi:
   # host: diego-api.core.example.com
   # aws_diego_api_role_arn: # e.g. arn:aws:iam::1234567890:role/DiegoApiRole
+  ingress:
+    enabled: false
   image:
     repository: diegocloudio/diego-api
     tag: main
