@@ -45,7 +45,6 @@ spec:
                       items:
                         properties:
                           key:
-                            pattern: ^[a-zA-Z0-9][a-zA-Z0-9-_]{0,20}[a-zA-Z0-9]$
                             type: string
                         required:
                         - key
