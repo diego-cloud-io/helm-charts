@@ -30,6 +30,8 @@ diegoapi:
     repository: diegocloudio/diego-api
     tag: main
     imagePullPolicy: Always
+  ingress:
+    enabled: false    
 
 diego_application_controller:
   ingress_host_domain: example.com
