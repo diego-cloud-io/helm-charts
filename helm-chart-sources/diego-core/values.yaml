@@ -21,6 +21,7 @@ diego_hub:
   image:
     repository: diegocloudio/diego-hub
     tag: main
+    imagePullPolicy: Always    
 
 diegoapi:
   # host: diego-api.core.example.com
@@ -28,6 +29,7 @@ diegoapi:
   image:
     repository: diegocloudio/diego-api
     tag: main
+    imagePullPolicy: Always
 
 diego_application_controller:
   ingress_host_domain: example.com

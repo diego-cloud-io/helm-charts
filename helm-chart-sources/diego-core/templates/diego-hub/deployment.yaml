@@ -24,6 +24,7 @@ spec:
       #   runAsNonRoot: true
       containers:
       - image: {{ .Values.diego_hub.image.repository }}:{{ .Values.diego_hub.image.tag }}
+        imagePullPolicy: {{ .Values.diego_hub.image.imagePullPolicy }}
         name: diego-hub
         volumeMounts: []
         env: []
