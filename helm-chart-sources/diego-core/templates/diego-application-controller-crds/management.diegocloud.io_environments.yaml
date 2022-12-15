@@ -89,7 +89,7 @@ spec:
                           type: boolean
                         synced:
                           type: boolean
-                       versionRef:
+                        versionRef:
                           properties:
                             name:
                               type: string
