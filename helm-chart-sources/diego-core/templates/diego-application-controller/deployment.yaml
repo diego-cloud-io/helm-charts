@@ -48,6 +48,10 @@ spec:
           name: cert
           readOnly: true
         env:
+{{- if .Values.diego_application_controller.project_repo_name }}        
+        - name: PROJECT_REPO_NAME
+          value: {{ .Values.diego_application_controller.project_repo_name }}
+{{- end }}
         - name: GITHUB_PRIVATE_KEY
           value: /etc/controller/github/app.pem
         - name: GITHUB_APP_ID
