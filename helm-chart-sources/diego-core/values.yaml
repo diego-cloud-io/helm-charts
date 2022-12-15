@@ -34,6 +34,7 @@ diegoapi:
     enabled: false    
 
 diego_application_controller:
+  # project_repo_name: diego-default-project
   ingress_host_domain: example.com
   # aws_actions_role_arn: # e.g. arn:aws:iam::1234567890:role/DiegoCIRole
   image:
