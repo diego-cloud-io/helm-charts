@@ -89,12 +89,20 @@ spec:
                           type: boolean
                         synced:
                           type: boolean
+                       versionRef:
++                          properties:
++                            name:
++                              type: string
++                          required:
++                          - name
++                          type: object
                       required:
                       - complete
                       - current
                       - found
                       - healthy
                       - synced
+                      - versionRef
                       type: object
                     type: object
                 type: object
