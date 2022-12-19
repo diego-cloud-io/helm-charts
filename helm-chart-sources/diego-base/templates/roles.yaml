@@ -1,0 +1,33 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: version-creator-role
+rules:
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - versions
+  verbs:
+  - create
+- apiGroups:
+  - management.diegocloud.io
+  resources:
+  - versions/finalizers
+  verbs:
+  - update
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: version-creator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: version-creator-role
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: version-creators
+  namespace: default
