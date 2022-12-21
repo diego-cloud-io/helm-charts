@@ -38,6 +38,7 @@ diego_application_controller:
   ingress_host_domain: example.com
   # aws_actions_role_arn: # e.g. arn:aws:iam::1234567890:role/DiegoCIRole
   # aws_diego_app_controller_role_arn: # e.g. arn:aws:iam::1234567890:role/DiegoAppControllerRole
+  # aws_region: # e.g. eu-west-2
   image:
     repository: diegocloudio/application-controller
     tag: main
