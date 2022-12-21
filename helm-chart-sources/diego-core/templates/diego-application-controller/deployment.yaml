@@ -78,6 +78,8 @@ spec:
           value: {{ .Values.diego_application_controller.argocd_host | quote }}
         - name: AWS_ACTIONS_ROLE_ARN
           value: {{ .Values.diego_application_controller.aws_actions_role_arn | quote }}
+        - name: AWS_REGION
+          value: {{ .Values.diego_application_controller.aws_region | quote }}
         ports:
         - containerPort: 9443
           name: webhook-server
