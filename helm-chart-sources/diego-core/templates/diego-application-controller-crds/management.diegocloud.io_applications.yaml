@@ -72,6 +72,17 @@ spec:
           status:
             description: ApplicationStatus defines the observed state of Application
             properties:
+              ecrRepository:
+                properties:
+                  arn:
+                    type: string
+                  errorDescription:
+                    type: string
+                  status:
+                    type: string
+                required:
+                - status
+                type: object
               lastSyncTime:
                 description: Last time we updated the repository or setup status.
                 format: date-time
