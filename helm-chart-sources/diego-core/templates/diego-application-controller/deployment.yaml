@@ -80,6 +80,8 @@ spec:
           value: {{ .Values.diego_application_controller.aws_actions_role_arn | quote }}
         - name: AWS_REGION
           value: {{ .Values.diego_application_controller.aws_region | quote }}
+        - name: TARGET_CLUSTER_NAME
+          value: {{ .Values.diego_application_controller.target_cluster_name | quote }}
         ports:
         - containerPort: 9443
           name: webhook-server
