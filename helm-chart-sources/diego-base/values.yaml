@@ -36,6 +36,44 @@ argo-cd:
       tls: 
       - hosts:
         #- required, argocd.diego.{{{ DOMAIN }}}
+    extensions:
+      # -- Enable support for Argo UI extensions
+      enabled: true
+
+      # Cosmin the below vvvvv are the default values you will get, 
+      # and these are probably ok, but showing them here in case you 
+      # overide them ?
+
+      # ## Argo UI extensions image
+      # image:
+      #   # -- Repository to use for extensions image
+      #   repository: "ghcr.io/argoproj-labs/argocd-extensions"
+      #   # -- Tag to use for extensions image
+      #   tag: "v0.2.1"
+      #   # -- Image pull policy for extensions
+      #   # @default -- `""` (defaults to global.image.imagePullPolicy)
+      #   imagePullPolicy: ""
+
+      # # -- Server UI extensions container-level security context
+      # # @default -- See [values.yaml]
+      # containerSecurityContext:
+      #   runAsNonRoot: true
+      #   readOnlyRootFilesystem: true
+      #   allowPrivilegeEscalation: false
+      #   seccompProfile:
+      #     type: RuntimeDefault
+      #   capabilities:
+      #     drop:
+      #     - ALL
+
+      # # -- Resource limits and requests for the argocd-extensions container
+      # resources: {}
+      # #  limits:
+      # #    cpu: 50m
+      # #    memory: 128Mi
+      # #  requests:
+      # #    cpu: 10m
+      # #    memory: 64Mi
   configs:
     cm:          
       url: # required, https://argocd.diego.{{{ DOMAIN }}}

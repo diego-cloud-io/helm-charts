@@ -36,6 +36,10 @@ argo-cd:
       tls: 
       - hosts:
         - argocd.diego.diegotest1.com
+    extensions:
+      # -- Enable support for Argo UI extensions
+      enabled: true
+
   configs:
     cm:    
       url: https://argocd.diego.diegotest1.com
