@@ -6,7 +6,7 @@ fullnameOverride: ""
 
 # The customer domain, e.g. acme.com. Diego componets will be installed using
 # the pattern {component}.diego.{domain}, e.g. argocd.diego.acme.com
-domain: 
+domain:
 
 # See https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#repositories
 # Each item in the list is used to generate a private repository using the Github App specified
@@ -24,7 +24,7 @@ argo-cd:
         serviceType: ClusterIP
     ingress:
       enabled: true
-      annotations: 
+      annotations:
         alb.ingress.kubernetes.io/scheme: internet-facing
         alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
         alb.ingress.kubernetes.io/backend-protocol: HTTPS
@@ -33,15 +33,15 @@ argo-cd:
 
       hosts:
       #- required, argocd.diego.{{{ DOMAIN }}}
-      tls: 
-      - hosts:
-        #- required, argocd.diego.{{{ DOMAIN }}}
+      tls:
+        - hosts:
+          #- required, argocd.diego.{{{ DOMAIN }}}
     extensions:
       # -- Enable support for Argo UI extensions
       enabled: true
 
-      # Cosmin the below vvvvv are the default values you will get, 
-      # and these are probably ok, but showing them here in case you 
+      # Cosmin the below vvvvv are the default values you will get,
+      # and these are probably ok, but showing them here in case you
       # overide them ?
 
       # ## Argo UI extensions image
@@ -56,9 +56,9 @@ argo-cd:
 
       # # -- Server UI extensions container-level security context
       # # @default -- See [values.yaml]
-      # containerSecurityContext:
-      #   runAsNonRoot: true
-      #   readOnlyRootFilesystem: true
+      containerSecurityContext:
+        #   runAsNonRoot: true
+        readOnlyRootFilesystem: false
       #   allowPrivilegeEscalation: false
       #   seccompProfile:
       #     type: RuntimeDefault
@@ -75,15 +75,15 @@ argo-cd:
       # #    cpu: 10m
       # #    memory: 64Mi
   configs:
-    cm:          
+    cm:
       url: # required, https://argocd.diego.{{{ DOMAIN }}}
       oidc.config: |
-          name: Dex          
-          issuer: # required, https://argocd.diego.{{{ DOMAIN }}}
-          clientID: argocd
-          clientSecret: argocd-oauth:client_secret
-          requestedScopes: ["openid", "profile", "email", "groups"]
-          requestedIDTokenClaims: {"groups": {"essential": true}}
+        name: Dex          
+        issuer: # required, https://argocd.diego.{{{ DOMAIN }}}
+        clientID: argocd
+        clientSecret: argocd-oauth:client_secret
+        requestedScopes: ["openid", "profile", "email", "groups"]
+        requestedIDTokenClaims: {"groups": {"essential": true}}
       resource.customizations.health.infra.diegocloud.io_Component: |
         hs = {}
         hs.status = "Progressing" 
@@ -115,9 +115,9 @@ argo-cd:
             return obj
     rbac:
       policy.default: role:admin
-    secret: 
+    secret:
       ## Argo expects the password in the secret to be bcrypt hashed. You can create this hash with
-      ## `htpasswd -nbBC 10 "" $ARGO_PWD | tr -d ':\n' | sed 's/$2y/$2a/'`      
+      ## `htpasswd -nbBC 10 "" $ARGO_PWD | tr -d ':\n' | sed 's/$2y/$2a/'`
       argocdServerAdminPassword: # required
   dex:
     enabled: false # don't install dex bundled with argo
