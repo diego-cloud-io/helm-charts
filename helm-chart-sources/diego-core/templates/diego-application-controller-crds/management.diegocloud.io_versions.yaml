@@ -78,8 +78,11 @@ spec:
                   - name
                   type: object
                 type: array
+              imageDeletionError:
+                type: string
             required:
             - approvals
+            - imageDeletionError
             type: object
         type: object
     served: true

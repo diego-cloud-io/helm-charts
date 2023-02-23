@@ -42,4 +42,4 @@ diego_application_controller:
   # target_cluster_name: my-cluster
   image:
     repository: diegocloudio/application-controller
-    tag: main
+    tag: 0.1.0
