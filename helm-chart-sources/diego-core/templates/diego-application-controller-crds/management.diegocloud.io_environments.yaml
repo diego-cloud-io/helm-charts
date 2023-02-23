@@ -91,10 +91,24 @@ spec:
                           type: boolean
                         versionRef:
                           properties:
+                            creationTimestamp:
+                              format: date-time
+                              type: string
                             name:
                               type: string
+                            sourceRef:
+                              properties:
+                                branch:
+                                  type: string
+                                commit:
+                                  type: string
+                                githubPrNumber:
+                                  type: integer
+                              type: object
                           required:
+                          - creationTimestamp
                           - name
+                          - sourceRef
                           type: object
                       required:
                       - complete
@@ -102,7 +116,6 @@ spec:
                       - found
                       - healthy
                       - synced
-                      - versionRef
                       type: object
                     type: object
                 type: object
@@ -112,28 +125,71 @@ spec:
                   applications:
                     additionalProperties:
                       properties:
+                        files:
+                          additionalProperties:
+                            type: string
+                          type: object
+                        history:
+                          items:
+                            properties:
+                              pushedAt:
+                                format: date-time
+                                type: string
+                              versionRef:
+                                properties:
+                                  creationTimestamp:
+                                    format: date-time
+                                    type: string
+                                  name:
+                                    type: string
+                                  sourceRef:
+                                    properties:
+                                      branch:
+                                        type: string
+                                      commit:
+                                        type: string
+                                      githubPrNumber:
+                                        type: integer
+                                    type: object
+                                required:
+                                - creationTimestamp
+                                - name
+                                - sourceRef
+                                type: object
+                            required:
+                            - pushedAt
+                            - versionRef
+                            type: object
+                          type: array
                         imageTagMatch:
                           type: string
                         ingressHost:
                           type: string
-                        versionName:
-                          type: string
-                        versionSource:
+                        versionRef:
                           properties:
-                            branch:
+                            creationTimestamp:
+                              format: date-time
                               type: string
-                            commit:
+                            name:
                               type: string
-                            githubPrNumber:
-                              type: integer
+                            sourceRef:
+                              properties:
+                                branch:
+                                  type: string
+                                commit:
+                                  type: string
+                                githubPrNumber:
+                                  type: integer
+                              type: object
+                          required:
+                          - creationTimestamp
+                          - name
+                          - sourceRef
                           type: object
                       required:
+                      - history
                       - imageTagMatch
                       type: object
-                    type: object
-                  files:
-                    additionalProperties:
-                      type: string
                     type: object
                 type: object
             type: object
