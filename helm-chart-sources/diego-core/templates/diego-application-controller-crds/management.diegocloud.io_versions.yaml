@@ -82,7 +82,6 @@ spec:
                 type: string
             required:
             - approvals
-            - imageDeletionError
             type: object
         type: object
     served: true
