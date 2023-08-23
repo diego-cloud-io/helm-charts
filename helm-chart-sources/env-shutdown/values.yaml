@@ -1,0 +1,67 @@
+image:
+  repository: diegocloudio/env-shutdown
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+settings:
+  sleep: 
+    schedule: "* 20 * * 1,2,3,4,5"
+    # schedule: "0/2 * * * 1,2,3,4,5" # a useful testing configuration
+    startingDeadlineSeconds: 500
+    successfulJobsHistoryLimit: 5
+    failedJobsHistoryLimit: 5
+    timeZone: null # or maybe "Europe/London", if the cluster supports it
+    suspend: false
+  wakeup: 
+    schedule: "* 7 * * 1,2,3,4,5"
+    # schedule: "1/2 * * * 1,2,3,4,5" # a useful testing configuration
+    startingDeadlineSeconds: null # prefer to wake up later
+    successfulJobsHistoryLimit: 5
+    failedJobsHistoryLimit: 5
+    timeZone: null # or "Europe/London", if the cluster supports it
+    suspend: false
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

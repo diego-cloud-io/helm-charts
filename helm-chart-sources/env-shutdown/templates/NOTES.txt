@@ -1,0 +1,4 @@
+1. Check the status of the CronJobs by running these commands:
+
+kubectl get cronjobs --namespace {{ .Release.Namespace }} {{ include "chart.fullname" . }}-sleep
+kubectl get cronjobs --namespace {{ .Release.Namespace }} {{ include "chart.fullname" . }}-wakeup

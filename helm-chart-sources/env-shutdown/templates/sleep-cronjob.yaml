@@ -1,0 +1,66 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "chart.fullname" . }}-sleep
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.settings.sleep }}
+  schedule: {{ .schedule | quote }}
+  suspend: {{ .suspend }}
+  startingDeadlineSeconds: {{ .startingDeadlineSeconds | default 300 }}
+  successfulJobsHistoryLimit: {{ .successfulJobsHistoryLimit | default 5 }}
+  failedJobsHistoryLimit: {{ .failedJobsHistoryLimit | default 5 }}
+  {{- with .timeZone }}
+  timeZone: {{ . | quote }}
+  {{- end }}
+  {{- end }}
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      parallelism: 1
+      completions: 1
+      completionMode: NonIndexed
+      backoffLimit: 3
+      activeDeadlineSeconds: 300 # this will interact with the lock acquisition (timeout) parameters
+      ttlSecondsAfterFinished: 86400 # 24h
+      suspend: false
+      template:
+        metadata:
+          {{- with .Values.podAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 14 }}
+          {{- end }}
+          labels:
+            {{- include "chart.selectorLabels" . | nindent 14 }}
+        spec:
+          restartPolicy: Never
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 14 }}
+          {{- end }}
+          serviceAccountName: {{ include "chart.serviceAccountName" . }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 14 }}
+          containers:
+            - name: {{ .Chart.Name }}
+              securityContext:
+                {{- toYaml .Values.securityContext | nindent 18 }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              args:
+              - -command=sleep
+              resources:
+                {{- toYaml .Values.resources | nindent 18 }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 14 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 14 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 14 }}
+          {{- end }}
